@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Escola de Futebol LJ">
+  <title>Escola de Futebol LJ</title>
+  <defs><linearGradient id="lj" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB21E"/><stop offset="0.55" stop-color="#FF6A13"/><stop offset="1" stop-color="#E8420A"/></linearGradient></defs>
+  <g transform="translate(6 0) skewX(-10)">
+    <path d="M8 4H52V34C52 46 42 54 30 60C18 54 8 46 8 34Z" fill="url(#lj)"/>
+    <g fill="none" stroke="#050506" stroke-width="6.5" stroke-linejoin="miter" stroke-miterlimit="10">
+      <path d="M17.5 12V35.5H29"/>
+      <path d="M38 12V35A9.5 9.5 0 0 1 28.5 44.5H25"/>
+    </g>
+    <circle cx="19.5" cy="44.5" r="3.6" fill="#050506"/>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* Paleta provisória — será definida na Fase 3 (identidade visual). */
+@theme {
+  --color-ink: #0b0b0c;
+  --color-chalk: #f5f5f2;
+  --color-pitch: #22c55e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

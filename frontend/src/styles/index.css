@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   DESIGN SYSTEM — Escola de Futebol LJ (identidade provisória)
+   Assinatura: a inclinação de 10° do escudo (velocidade) e a luz de
+   refletor (laranja → âmbar) sobre preto, grafite e branco.
+   ===================================================================== */
+
+@theme {
+  /* Cores */
+  --color-ink: #050506;        /* preto profundo */
+  --color-carbon: #0e0f12;     /* fundo das seções escuras */
+  --color-graphite: #17191d;   /* cards e superfícies escuras */
+  --color-graphite-2: #24272d; /* bordas e divisórias no escuro */
+  --color-steel: #8a9099;      /* texto secundário */
+  --color-mist: #d8dbe0;       /* bordas no claro */
+  --color-paper: #f4f5f7;      /* fundo claro */
+  --color-flame: #ff6a13;      /* destaque: refletor / ação */
+  --color-amber: #ffb21e;      /* início do gradiente */
+  --color-ember: #e8420a;      /* fim do gradiente, hover */
+
+  /* Tipografia */
+  --font-display: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
+  --font-sans: "Barlow", system-ui, sans-serif;
+
+  /* Animações */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-marquee: marquee 38s linear infinite;
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+}
+
+:root {
+  /* Gradientes */
+  --grad-flame: linear-gradient(115deg, var(--color-amber) 0%, var(--color-flame) 48%, var(--color-ember) 100%);
+  --grad-night: radial-gradient(120% 80% at 80% 0%, #2a1a0e 0%, var(--color-carbon) 55%, var(--color-ink) 100%);
+
+  /* Espaçamentos */
+  --space-section: clamp(5rem, 11vw, 10rem);
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+
+  /* Efeitos */
+  --radius-sm: 6px;
+  --radius-lg: 20px;
+  --shadow-deep: 0 30px 60px -20px rgb(0 0 0 / 0.55), 0 12px 24px -12px rgb(0 0 0 / 0.4);
+  --glass-bg: rgb(23 25 29 / 0.62);
+  --glass-border: rgb(255 255 255 / 0.1);
+  --skew: -10deg;
+
+  /* Barra inferior do celular */
+  --tabbar-h: 4.25rem;
+  --tabbar-space: calc(var(--tabbar-h) + 1.5rem + env(safe-area-inset-bottom));
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-ink font-sans text-paper antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-flame);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-flame);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-lj {
+    @apply mx-auto w-full max-w-[1440px];
+    padding-inline: var(--gutter);
+  }
+  .section {
+    padding-block: var(--space-section);
+  }
+  /* Títulos: letreiro de estádio */
+  .display {
+    @apply font-display font-black uppercase;
+    line-height: 0.86;
+    letter-spacing: -0.01em;
+  }
+  .text-flame-grad {
+    background: var(--grad-flame);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-flame-grad {
+    background: var(--grad-flame);
+  }
+  .bg-night {
+    background: var(--grad-night);
+  }
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    backdrop-filter: blur(18px) saturate(1.4);
+  }
+  /* Textura de granulação de filme sobre seções escuras */
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.09;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* Recorte inclinado das fotos — ecoa o escudo da logo */
+  .clip-slant {
+    clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+  }
+  .clip-slant-r {
+    clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  }
+  /* Link com sublinhado que cresce no hover */
+  .link-grow {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat;
+    transition: background-size 0.35s var(--ease-out-expo);
+  }
+  .link-grow:hover {
+    background-size: 100% 2px;
+  }
+  /* Espaço para a barra inferior no celular */
+  .app-shell {
+    padding-bottom: var(--tabbar-space);
+  }
+  @media (min-width: 1024px) {
+    .app-shell {
+      padding-bottom: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes scrollcue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(260%); }
+}
